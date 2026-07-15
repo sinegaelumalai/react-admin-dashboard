@@ -29,7 +29,7 @@ export default function SalesCard() {
       </div>
 
       {/* Circle */}
-      <div className="mx-auto mt-8 h-56 w-56">
+      <div className="mx-auto mt-8 h-48 w-56">
         <CircularProgressbarWithChildren
           value={72}
           strokeWidth={8}
@@ -39,7 +39,7 @@ export default function SalesCard() {
           })}
         >
           <div className="text-center">
-            <h2 className="text-5xl font-bold text-gray-700">
+            <h2 className="text-4xl font-bold text-gray-700">
               3.500
             </h2>
 
@@ -51,12 +51,12 @@ export default function SalesCard() {
       </div>
 
       {/* Bottom */}
-      <div className="mt-8 space-y-5">
+      <div className="mt-8 space-y-1">
         <div className="flex items-center justify-between border-b border-gray-100 pb-4">
           <div className="flex items-center gap-3">
             <span className="h-3 w-3 rounded-full bg-green-600"></span>
 
-            <span className="text-lg text-gray-500">
+            <span className="text-md text-gray-500">
               Current Week
             </span>
           </div>
@@ -74,7 +74,7 @@ export default function SalesCard() {
           <div className="flex items-center gap-3">
             <span className="h-3 w-3 rounded-full bg-cyan-400"></span>
 
-            <span className="text-lg text-gray-500">
+            <span className="text-md text-gray-500">
               Last Week
             </span>
           </div>
