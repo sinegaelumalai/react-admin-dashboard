@@ -15,13 +15,16 @@ import {
 } from "react-icons/fi";
 
 export default function Header({
+  
   showProfile,
   setShowProfile,
 }) {
 
+  const navigate = useNavigate();
+
+
   const [showTopMenu, setShowTopMenu] = useState(false);
 
-  const navigate = useNavigate();
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [showNotificationDot, setShowNotificationDot] = useState(true);
 
@@ -61,47 +64,46 @@ export default function Header({
 
 
   return (
-    <header className="sticky top-0 z-50 flex h-20 items-center justify-between border-b border-gray-200 bg-white px-8">
+    <header className="sticky top-0 z-50 flex h-20 items-center justify-between bg-white px-8">
 
       {/* Left */}
       {/* Left */}
-<div className="flex items-center">
+      <div className="flex items-center">
 
-  <button
-    onClick={() => setShowTopMenu(!showTopMenu)}
-    className="rounded-lg p-2 transition duration-300 hover:bg-gray-100"
-  >
-    <FiMenu size={24} className="text-gray-700" />
-  </button>
+        <button
+          onClick={() => setShowTopMenu(!showTopMenu)}
+          className="rounded-lg p-2 transition duration-300 hover:bg-gray-100"
+        >
+          <FiMenu size={24} className="text-gray-700" />
+        </button>
 
-  <div
-    className={`overflow-hidden transition-all duration-300 ${
-      showTopMenu
-        ? "ml-4 max-w-md opacity-100"
-        : "ml-0 max-w-0 opacity-0"
-    }`}
-  >
-    <div className="flex items-center gap-8 whitespace-nowrap">
+        <div
+          className={`overflow-hidden transition-all duration-300 ${showTopMenu
+              ? "ml-4 max-w-md opacity-100"
+              : "ml-0 max-w-0 opacity-0"
+            }`}
+        >
+          <div className="flex items-center gap-8 whitespace-nowrap">
 
-      <button className="flex items-center gap-2 rounded-xl bg-gray-100 px-5 py-3 font-medium text-green-600">
-        <FiSettings size={18} />
-        Settings
-      </button>
+            <button className="flex items-center gap-2 rounded-xl bg-gray-100 px-5 py-3 font-medium text-green-600">
+              <FiSettings size={18} />
+              Settings
+            </button>
 
-      <button className="font-medium text-gray-700 transition hover:text-green-600">
-        Activity
-      </button>
+            <button className="font-medium text-gray-700 transition hover:text-green-600">
+              Activity
+            </button>
 
-      <button className="font-medium text-gray-700 transition hover:text-green-600">
-        Users
-      </button>
+            <button className="font-medium text-gray-700 transition hover:text-green-600">
+              Users
+            </button>
 
-    </div>
-  </div>
+          </div>
+        </div>
 
-</div>
+      </div>
 
-      
+
 
       {/* Right */}
       <div className="flex items-center gap-6">
@@ -128,7 +130,7 @@ export default function Header({
           {notificationOpen && (
             <div className="absolute right-0 mt-3 w-[340px] overflow-hidden rounded-3xl bg-white shadow-2xl">
 
-              <div className="flex items-center justify-between border-b px-6 py-5">
+              <div className="flex items-center justify-between px-6 py-5">
 
                 <h3 className="text-2xl font-semibold text-gray-700">
                   Notifications
@@ -221,7 +223,7 @@ export default function Header({
           {open && (
             <div className="absolute right-0 mt-3 w-80 overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-2xl z-50">
               {/* Profile */}
-              <div className="flex items-center justify-between border-b p-5">
+              <div className="flex items-center justify-between p-5">
                 <div className="flex items-center gap-3">
                   <img
                     src={profile}
@@ -254,10 +256,16 @@ export default function Header({
                     setOpen(false);
                   }}
                 />
-                <MenuItem icon={<FiMail />} text="My Messages" />
+                <MenuItem
+                  icon={<FiMail />}
+                  text="My Messages"
+                  onClick={() => {
+                    setOpen(false);
+                    navigate("/chat");
+                  }}
+                />
                 <MenuItem icon={<FiBriefcase />} text="My Tasks" />
 
-                <hr className="my-3" />
 
                 <MenuItem icon={<FiSettings />} text="Settings" active />
 
@@ -267,7 +275,6 @@ export default function Header({
                   onClick={() => navigate("/login")}
                 />
 
-                <hr className="my-3" />
 
                 <MenuItem icon={<FiLogOut />} text="Logout" />
               </div>

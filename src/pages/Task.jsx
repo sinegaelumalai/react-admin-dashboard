@@ -146,7 +146,10 @@ export default function Task() {
                   size={22}
                   className="text-gray-500"
                 />
-                <span className="text-2xl font-medium text-gray-700">
+                <span
+                  onClick={() => navigate("/task")}
+                  className="cursor-pointer text-1xl font-medium text-gray-700 transition hover:text-green-600"
+                >
                   Task
                 </span>
               </button>
@@ -156,7 +159,7 @@ export default function Task() {
                   size={22}
                   className="text-gray-500"
                 />
-                <span className="text-2xl font-medium text-gray-700">
+                <span className="text-1xl font-medium text-gray-700">
                   Board
                 </span>
               </button>
@@ -166,7 +169,7 @@ export default function Task() {
                   size={22}
                   className="text-gray-500"
                 />
-                <span className="text-2xl font-medium text-gray-700">
+                <span className="text-1xl font-medium text-gray-700">
                   Project
                 </span>
               </button>
@@ -176,7 +179,7 @@ export default function Task() {
                   size={22}
                   className="text-gray-500"
                 />
-                <span className="text-2xl font-medium text-gray-700">
+                <span className="text-1xl font-medium text-gray-700">
                   Invite
                 </span>
               </button>
