@@ -34,7 +34,7 @@ export default function Header({
     { id: 3, name: "Ronald Robertson", time: "3 hour ago" },
     { id: 4, name: "Dustin Williamson", time: "15 hour ago" },
     { id: 5, name: "Calvin Flores", time: "Yesterday" },
-  
+    { id: 6, name: "Robert Edwards", time: "Yesterday" },
   ]);
 
   const removeNotification = (id) => {
