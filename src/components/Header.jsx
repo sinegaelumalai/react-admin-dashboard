@@ -15,7 +15,7 @@ import {
 } from "react-icons/fi";
 
 export default function Header({
-  
+
   showProfile,
   setShowProfile,
 }) {
@@ -27,6 +27,21 @@ export default function Header({
 
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [showNotificationDot, setShowNotificationDot] = useState(true);
+
+  const [notifications, setNotifications] = useState([
+    { id: 1, name: "Regina Cooper", time: "1 min ago" },
+    { id: 2, name: "Judith Black", time: "5 min ago" },
+    { id: 3, name: "Ronald Robertson", time: "3 hour ago" },
+    { id: 4, name: "Dustin Williamson", time: "15 hour ago" },
+    { id: 5, name: "Calvin Flores", time: "Yesterday" },
+  
+  ]);
+
+  const removeNotification = (id) => {
+    setNotifications((prev) =>
+      prev.filter((notification) => notification.id !== id)
+    );
+  };
 
   const notificationRef = useRef(null);
 
@@ -79,8 +94,8 @@ export default function Header({
 
         <div
           className={`overflow-hidden transition-all duration-300 ${showTopMenu
-              ? "ml-4 max-w-md opacity-100"
-              : "ml-0 max-w-0 opacity-0"
+            ? "ml-4 max-w-md opacity-100"
+            : "ml-0 max-w-0 opacity-0"
             }`}
         >
           <div className="flex items-center gap-8 whitespace-nowrap">
@@ -128,68 +143,61 @@ export default function Header({
           </button>
 
           {notificationOpen && (
-            <div className="absolute right-0 mt-3 w-[340px] overflow-hidden rounded-3xl bg-white shadow-2xl">
+            <div className="absolute right-0 mt-3 w-[290px] overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-xl">
 
-              <div className="flex items-center justify-between px-6 py-5">
-
-                <h3 className="text-2xl font-semibold text-gray-700">
+              <div className="flex items-center justify-between px-5 py-4">
+                <h3 className="text-xl font-semibold text-gray-800">
                   Notifications
                 </h3>
 
-                <span className="rounded-full bg-red-400 px-2 py-1 text-xs text-white">
-                  8
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-red-500 text-xs font-medium text-white">
+                  {notifications.length}
                 </span>
-
               </div>
 
-              {[
-                ["Regina Cooper", "1 min ago"],
-                ["Judith Black", "5 min ago"],
-                ["Ronald Robertson", "3 hour ago"],
-                ["Dustin Williamson", "15 hour ago"],
-                ["Calvin Flores", "Yesterday"],
-                ["Robert Edwards", "Yesterday"],
-              ].map((item, index) => (
+              {notifications.length === 0 ? (
+                <div className="py-8 text-center text-sm text-gray-500">
+                  No Notifications
+                </div>
+              ) : (
+                notifications.map((item, index) => (
+                  <div
+                    key={item.id}
+                    className={`flex cursor-pointer items-center gap-3 px-4 py-3 transition hover:bg-gray-50 ${index === 1 ? "bg-gray-100" : ""
+                      }`}
+                  >
+                    <div className="relative">
+                      <img
+                        src={profile}
+                        alt=""
+                        className="h-10 w-10 rounded-full"
+                      />
 
-                <div
-                  key={index}
-                  className={`flex cursor-pointer items-center gap-4 px-5 py-4 transition hover:bg-gray-50 ${index === 1 ? "bg-gray-100" : ""
-                    }`}
-                >
+                      <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full border-2 border-white bg-green-500"></span>
+                    </div>
 
-                  <div className="relative">
+                    <div className="flex-1">
+                      <h4 className="text-sm font-semibold text-gray-800">
+                        {item.name}
+                      </h4>
 
-                    <img
-                      src={profile}
-                      alt=""
-                      className="h-12 w-12 rounded-full"
-                    />
+                      <p className="text-xs text-gray-500">
+                        {item.time}
+                      </p>
+                    </div>
 
-                    <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-white bg-green-500"></span>
-
-                  </div>
-
-                  <div className="flex-1">
-
-                    <h4 className="font-medium text-gray-700">
-                      {item[0]}
-                    </h4>
-
-                    <p className="text-sm text-gray-400">
-                      {item[1]}
-                    </p>
-
-                  </div>
-
-                  {index === 1 && (
-                    <button className="rounded-full bg-gray-200 p-1 text-gray-500 hover:bg-gray-300">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        removeNotification(item.id);
+                      }}
+                      className="flex h-7 w-7 items-center justify-center rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200"
+                    >
                       ✕
                     </button>
-                  )}
-
-                </div>
-
-              ))}
+                  </div>
+                ))
+              )}
 
             </div>
           )}
